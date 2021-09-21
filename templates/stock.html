@@ -4,27 +4,23 @@
 
   <div class="container my-3 col-md-4 centered">
       <h3>Add Stock</h3>
-      <form>
+      <form method="POST" action="/stock">
         <div class="form-floating mb-3">  
-          <input type="text" class="form-control" id="itemCode" placeholder="ITM001">
+          <input type="text" class="form-control" name="itemCode" id="itemCode" placeholder="ITM001" required>
           <label for="itemCode" class="form-label">Item Code</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="itemName" placeholder="Item Name">
+            <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Item Name" required>
             <label for="itemName" class="form-label">Item Name</label>
           </div>
 
         <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="expiryDate" placeholder="12">
+            <input type="number" class="form-control" name="stockSize" id="stockSize" placeholder="12" required>
             <label for="stockSize" class="form-label">Number of Units</label>
         </div>
         <div class="mb-3">
             <label for="expiryDate" class="form-label">Expiry Date</label>
-            <input type="date" class="form-control" id="expiryDate">
-        </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <input type="date" class="form-control" name="expiryDate" id="expiryDate" required>
         </div>
         <button type="submit" class="btn btn-primary">Add</button>
       </form>
