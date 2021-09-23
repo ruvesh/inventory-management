@@ -3,27 +3,38 @@
 {% block body %}
 
   <div class="container my-3 col-md-4 centered">
-      <h3>Add Stock</h3>
-      <form method="POST" action="/stock">
-        <div class="form-floating mb-3">  
-          <input type="text" class="form-control" name="itemCode" id="itemCode" placeholder="ITM001" required>
-          <label for="itemCode" class="form-label">Item Code</label>
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title mb-5">Add Stock</h3>
+          <form method="POST" action="/stock">
+            <div class="form-floating mb-4">  
+              <input type="text" class="form-control" name="itemCode" id="itemCode" placeholder="ITM001" required>
+              <label for="itemCode" class="form-label">Item Code</label>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Item Name" required>
+                <label for="itemName" class="form-label">Item Name</label>
+              </div>
+    
+            <div class="form-floating mb-4">
+                <input type="number" class="form-control" name="stockSize" id="stockSize" placeholder="12" required>
+                <label for="stockSize" class="form-label">Number of Units</label>
+            </div>
+            <div class="mb-4">
+                <label for="expiryDate" class="form-label">Expiry Date</label>
+                <input type="date" class="form-control" name="expiryDate" id="expiryDate" required>
+            </div>
+            <div class="mb-3" style="float: right;">
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+            
+          </form>
         </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Item Name" required>
-            <label for="itemName" class="form-label">Item Name</label>
-          </div>
-
-        <div class="form-floating mb-3">
-            <input type="number" class="form-control" name="stockSize" id="stockSize" placeholder="12" required>
-            <label for="stockSize" class="form-label">Number of Units</label>
-        </div>
-        <div class="mb-3">
-            <label for="expiryDate" class="form-label">Expiry Date</label>
-            <input type="date" class="form-control" name="expiryDate" id="expiryDate" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Add</button>
-      </form>
+      </div>
+      
+     
   </div>
+
+
 
 {% endblock body %}
