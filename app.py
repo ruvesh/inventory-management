@@ -1,7 +1,8 @@
-from enum import unique
 from flask import Flask, render_template, request
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///inventory.db'
@@ -19,7 +20,7 @@ class Stock(db.Model):
     expiryDate=db.Column(db.DateTime, nullable=False)
 
     def __repr__(self) -> str:
-        return self.itemCode + " " + self.itemName + " of quantity " + self.stockSize + " expires on " + self.expiryDate 
+        return self.itemCode + " " + self.itemName + " of quantity " + str(self.stockSize) + " expires on " + str(self.expiryDate) 
 
 # Routes
 
@@ -28,7 +29,7 @@ def home_page():
     return render_template('index.html')
 
 @app.route('/stock', methods= ['POST', 'GET'])
-def stock_pile():
+def stock():
     if request.method == 'POST':
         itemCode=request.form['itemCode']
         itemName=request.form['itemName']
@@ -38,12 +39,15 @@ def stock_pile():
         stock=Stock(itemCode=itemCode, itemName=itemName, stockSize=stockSize, expiryDate=expiryDate)
         db.session.add(stock)
         db.session.commit()
-        return "<script>alert('Stock added successfully'); window.location.href = '/stock';</script>"
+        return "<script>alert('Stock added successfully'); window.location.href = '/inventory';</script>"
     return render_template('stock.html')
 
 @app.route('/inventory')
 def inventory():
-    return render_template('inventory.html')
+    ROWS_PER_PAGE=10
+    page = request.args.get('page', 1, int)    
+    allStocks=Stock.query.order_by(desc(Stock.id)).paginate(page=page, per_page=ROWS_PER_PAGE)
+    return render_template('inventory.html', allStocks=allStocks)
 
 @app.route('/reports')
 def reports():
