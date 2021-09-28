@@ -7,7 +7,7 @@
 
             <div class="card-body">
                 <h3 class="card-title">Inventory</h3>
-                <table class="table table-light table-hover">
+                <table class="table table-light">
                     <thead>
                       <tr>
                         <th scope="col">S.No</th>
@@ -16,17 +16,29 @@
                         <th scope="col">Stock Size</th>
                         <th scope="col">Date and Time of Entry</th>
                         <th scope="col">Expiry Date</th>
+                        <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
                         {% for stock in allStocks.items %}
-                            <tr id={{ stock.id }}>
+                            <tr>
                                 <th scope="row">{{ loop.index }}</th>
                                 <td>{{ stock.itemCode }}</td>
                                 <td>{{ stock.itemName }}</td>
                                 <td>{{ stock.stockSize }}</td>
                                 <td>{{ stock.entryTime }}</td>
                                 <td>{{ stock.expiryDate }}</td>
+                                <td> 
+                                    
+                                    <a href="/update/{{stock.id}}">
+                                        <i class="fa fa-pencil success-icon" aria-hidden="true"></i> 
+                                    </a>
+                                    &nbsp;
+                                    <a href="/delete/{{stock.id}}">
+                                        <i class="fa fa-trash danger-icon" aria-hidden="true"></i>  
+                                    </a>
+                                </td>
+                                
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -71,10 +83,7 @@
         </div>
         
     </div>
-    <script>
-        $(".table tr").click(function() {
-            alert($(this).attr("id"))
-        })
-    </script>
+
+
 {% endblock body %}
     

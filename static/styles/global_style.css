@@ -1,0 +1,14 @@
+.success-icon:hover{
+    color: rgba(42, 111, 238, 0.938);
+    cursor: pointer;
+}
+
+.danger-icon:hover{
+    color: red;
+    cursor: pointer;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}

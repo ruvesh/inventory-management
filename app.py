@@ -53,5 +53,29 @@ def inventory():
 def reports():
     return render_template('reports.html')
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    stock= Stock.query.filter_by(id=id).first()
+    db.session.delete(stock)
+    db.session.commit() 
+    return "<script>alert('Stock deleted successfully'); window.location.href = '/inventory';</script>"
+
+@app.route('/update/<int:id>', methods= ['POST', 'GET'])
+def update(id):
+    if request.method == 'GET':
+        stock=Stock.query.filter_by(id=id).first()
+        return render_template('update.html', stock=stock)
+    elif request.method == 'POST':
+        stock=Stock.query.filter_by(id=id).first()
+        stock.itemCode = request.form['itemCode']
+        stock.itemName = request.form['itemName']
+        stock.stockSize = request.form['stockSize']
+        stock.expiryDate = datetime.strptime(request.form['expiryDate'], "%Y-%m-%d")
+        
+        db.session.add(stock)
+        db.session.commit()
+        return "<script>alert('Stock updated successfully'); window.location.href = '/inventory';</script>"
+
+
 if __name__ == '__main__':
     app.run(debug=True)
