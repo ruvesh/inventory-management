@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, flash
 from datetime import datetime
+from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 
@@ -39,7 +40,8 @@ def stock():
         stock=Stock(itemCode=itemCode, itemName=itemName, stockSize=stockSize, expiryDate=expiryDate)
         db.session.add(stock)
         db.session.commit()
-        return "<script>alert('Stock added successfully'); window.location.href = '/inventory';</script>"
+        flash('Stock added successfully')
+        return redirect(url_for('inventory'))
     return render_template('stock.html')
 
 @app.route('/inventory')
@@ -58,7 +60,8 @@ def delete(id):
     stock= Stock.query.filter_by(id=id).first()
     db.session.delete(stock)
     db.session.commit() 
-    return "<script>alert('Stock deleted successfully'); window.location.href = '/inventory';</script>"
+    flash('Stock deleted successfully')
+    return redirect(url_for('inventory'))
 
 @app.route('/update/<int:id>', methods= ['POST', 'GET'])
 def update(id):
@@ -74,8 +77,10 @@ def update(id):
         
         db.session.add(stock)
         db.session.commit()
-        return "<script>alert('Stock updated successfully'); window.location.href = '/inventory';</script>"
+        flash('Stock updated successfully')
+        return redirect(url_for('inventory'))
 
 
 if __name__ == '__main__':
+    app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
     app.run(debug=True)

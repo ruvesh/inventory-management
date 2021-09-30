@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Inventory {% endblock title %}
 {% block body %}
+
     <div class="container-fluid my-3 centered">
        
         <div class="card" style="height: 80vh; width: 100%;">
@@ -34,7 +35,7 @@
                                         <i class="fa fa-pencil success-icon" aria-hidden="true"></i> 
                                     </a>
                                     &nbsp;
-                                    <a href="/delete/{{stock.id}}">
+                                    <a onclick="confirmDelete(event, '/delete/{{stock.id}}')">
                                         <i class="fa fa-trash danger-icon" aria-hidden="true"></i>  
                                     </a>
                                 </td>
