@@ -8,6 +8,7 @@
 
             <div class="card-body">
                 <h3 class="card-title">Inventory</h3>
+                
                 <table class="table table-light">
                     <thead>
                       <tr>
@@ -17,7 +18,16 @@
                         <th scope="col">Stock Size</th>
                         <th scope="col">Date and Time of Entry</th>
                         <th scope="col">Expiry Date</th>
-                        <th scope="col"></th>
+                        <th scope="col">
+                            <form autocomplete="off" action="/inventory" method="get">
+                                <div class="input-group input-group-sm mt-3">
+                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-btn" name="search">
+                                    <button class="btn btn-outline-secondary" type="submit" id="search-btn">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                  </div>
+                            </form>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -29,8 +39,7 @@
                                 <td>{{ stock.stockSize }}</td>
                                 <td>{{ stock.entryTime }}</td>
                                 <td>{{ stock.expiryDate }}</td>
-                                <td> 
-                                    
+                                <td align="center"> 
                                     <a href="/update/{{stock.id}}">
                                         <i class="fa fa-pencil success-icon" aria-hidden="true"></i> 
                                     </a>

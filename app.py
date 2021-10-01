@@ -1,3 +1,4 @@
+from operator import or_
 from flask import Flask, render_template, request, redirect, flash
 from datetime import datetime
 from flask.helpers import url_for
@@ -42,13 +43,24 @@ def stock():
         db.session.commit()
         flash('Stock added successfully')
         return redirect(url_for('inventory'))
+        
     return render_template('stock.html')
 
 @app.route('/inventory')
 def inventory():
     ROWS_PER_PAGE=10
-    page = request.args.get('page', 1, int)    
-    allStocks=Stock.query.order_by(desc(Stock.id)).paginate(page=page, per_page=ROWS_PER_PAGE)
+    page = request.args.get('page', 1, int)   
+    searchKeyword = request.args.get('search', 'all')
+    print(searchKeyword)
+    if searchKeyword == 'all': 
+        allStocks=Stock.query.order_by(desc(Stock.id)).paginate(page=page, per_page=ROWS_PER_PAGE)
+    else:
+        allStocks=Stock.query.filter(
+            or_(
+                Stock.itemCode.contains(searchKeyword),
+                Stock.itemName.contains(searchKeyword)
+        )).order_by(desc(Stock.id)).paginate(page=page, per_page=ROWS_PER_PAGE)
+    
     return render_template('inventory.html', allStocks=allStocks)
 
 @app.route('/reports')

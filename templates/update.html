@@ -6,7 +6,7 @@
       <div class="card">
         <div class="card-body">
           <h3 class="card-title mb-5">Update Stock</h3>
-          <form method="POST" action="/update/{{stock.id}}">
+          <form autocomplete="off"  method="POST" action="/update/{{stock.id}}">
             <div class="form-floating mb-4">  
               <input type="text" class="form-control" name="itemCode" id="itemCode" placeholder="ITM001" value="{{stock.itemCode}}" required>
               <label for="itemCode" class="form-label">Item Code</label>
@@ -25,7 +25,7 @@
                 <input type="date" class="form-control" name="expiryDate" id="expiryDate" value={{stock.expiryDate}} required>
             </div>
             <div class="mb-3" style="float: right;">
-              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="submit" class="btn btn-outline-dark btn-light">Update</button>
             </div>
             
           </form>
