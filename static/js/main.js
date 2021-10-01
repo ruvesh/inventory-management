@@ -1,4 +1,25 @@
 
+window.onload = function() {
+  setActiveNavLink();
+};
+
+function setActiveNavLink(){
+    route=window.location.pathname
+  switch (route) {
+    case '/stock':
+        document.getElementById("add-stock-nav-link").classList.add("active");
+        break;
+    case '/inventory':
+        document.getElementById("inventory-nav-link").classList.add("active");
+        break;
+    case '/reports':
+        document.getElementById("reports-nav-link").classList.add("active");
+        break;
+    default:
+        break;
+  }
+}
+
 function confirmDelete(e, delete_url){
     e.preventDefault()
     Swal.fire({
