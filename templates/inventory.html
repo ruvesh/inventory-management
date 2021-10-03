@@ -7,8 +7,14 @@
         <div class="card" style="height: 80vh; width: 100%;">
 
             <div class="card-body">
-                <h3 class="card-title">Inventory</h3>
-                
+                <div class="row">
+                    <div class="col-sm-11">
+                        <h3 class="card-title">Inventory</h3>
+                    </div>
+                   <div class="col-sm-1">
+                       <a id="view-all-btn" class="btn btn-light btn-outline-secondary hidden" href="/inventory">View All</a>
+                    </div>
+                </div>
                 <table class="table table-light">
                     <thead>
                       <tr>
@@ -21,7 +27,7 @@
                         <th scope="col">
                             <form autocomplete="off" action="/inventory" method="get">
                                 <div class="input-group input-group-sm mt-3">
-                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-btn" name="search">
+                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-btn" name="search" required>
                                     <button class="btn btn-outline-secondary" type="submit" id="search-btn">
                                         <i class="fa fa-search"></i>
                                     </button>

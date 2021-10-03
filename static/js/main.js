@@ -1,10 +1,18 @@
 
 window.onload = function() {
-  setActiveNavLink();
+  route=window.location.pathname
+  setActiveNavLink(route);
+  hideOrShowViewAllBtn(window.location.pathname, window.location.search)
 };
 
-function setActiveNavLink(){
-    route=window.location.pathname
+function hideOrShowViewAllBtn(windowLocationPath, windowLocationSearch){
+    if(windowLocationPath == '/inventory' && windowLocationSearch.includes('search') ){
+        document.getElementById("view-all-btn").classList.add("visible");
+    }
+}
+
+function setActiveNavLink(route){
+    
   switch (route) {
     case '/stock':
         document.getElementById("add-stock-nav-link").classList.add("active");

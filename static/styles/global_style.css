@@ -35,3 +35,11 @@ a{
     background-color: #525257 !Important;
     border: solid 1px #111011 !Important;
 }
+
+.hidden{
+    display: none;
+}
+
+.visible{
+    display: block;
+}
