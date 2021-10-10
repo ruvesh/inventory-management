@@ -20,3 +20,8 @@ a{
 .visible{
     display: block;
 }
+
+.report-tables{
+    height: 80vh; 
+    width: 100%;
+}

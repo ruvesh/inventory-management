@@ -1,7 +1,110 @@
 {% extends 'base.html' %}
 {% block title %} Reports {% endblock title %}
 {% block body %}
-    <div class="container my-3 col-md-4 centered">
-        <h3>Reports</h3>
+
+    
+    <div class="container-fluid my-3 centered">
+
+        <div class="card report-tables">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h3 class="card-title">Expires in {{ due }} {% if due > 1 %}
+                            months
+                        {% else %}
+                            month
+                        {% endif %}</h3>
+                    </div>
+                    <div class="col-sm-2">
+                        {% if searchKeyword != 'all' %}
+                            Showing search results for "{{searchKeyword}}"
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-1">
+                        <a class="view-all-btn btn btn-light btn-outline-secondary hidden" href="/reports?due={{ due }}">View All</a>
+                    </div>
+                </div>
+                <table class="table table-light">
+                    
+                    <thead>
+                        
+                      <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Item Code</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Stock Size</th>
+                        <th scope="col">Date and Time of Entry</th>
+                        <th scope="col">Expiry Date</th>
+                        <th scope="col">
+                            <form autocomplete="off" action="/reports" method="get">
+                                <div class="input-group input-group-sm mt-3">
+                                    <input type="hidden" name="due" value="{{due}}">
+                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-btn" name="search" required>
+                                    <button class="btn btn-outline-secondary" type="submit" id="search-btn">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                  </div>
+                            </form>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for stock in stocks.items %}
+                            <tr>
+                                <th scope="row">{{ loop.index }}</th>
+                                <td>{{ stock.itemCode }}</td>
+                                <td>{{ stock.itemName }}</td>
+                                <td>{{ stock.stockSize }}</td>
+                                <td>{{ stock.entryTime.strftime('%d-%m-%Y %I:%M %p') }}</td>
+                                <td>{{ stock.expiryDate.strftime('%d-%m-%Y') }}</td>
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- Pagination -->
+        <div class="container my-3">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-end">
+                <li class="page-item 
+                        {% if stocks.page == 1 %}
+                            disabled
+                        {% endif %}">
+                    <a class="page-link" href="{{ url_for('reports', page=stocks.prev_num, search=searchKeyword, due=due )}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% for page_num in stocks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        <li class="page-item {% if stocks.page == page_num %}
+                            active
+                        {% endif %}">
+                            <a class="page-link" href="{{ url_for('reports', page=page_num, search=searchKeyword, due=due  )}}">
+                                {{ page_num }}
+                            </a>
+                        </li>
+                    {% endif %} 
+                    
+                {% endfor %}
+                
+                <li class="page-item 
+                    {% if stocks.page == stocks.pages %}
+                        disabled
+                    {% endif %}">
+                    <a class="page-link" href="{{ url_for('reports', page=stocks.next_num, search=searchKeyword, due=due  )}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
+
+        </div>
     </div>   
+
+       
+
 {% endblock body %}

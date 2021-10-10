@@ -2,12 +2,14 @@
 window.onload = function() {
   route=window.location.pathname
   setActiveNavLink(route);
-  hideOrShowViewAllBtn(window.location.pathname, window.location.search)
+  hideOrShowViewAllBtn(window.location.pathname, window.location.search);
 };
 
 function hideOrShowViewAllBtn(windowLocationPath, windowLocationSearch){
-    if(windowLocationPath == '/inventory' && windowLocationSearch.includes('search') ){
-        document.getElementById("view-all-btn").classList.add("visible");
+    if((windowLocationPath == '/inventory' || windowLocationPath == '/reports') 
+        && windowLocationSearch.includes('search') 
+        && !windowLocationSearch.includes('all')){
+        document.getElementsByClassName("view-all-btn")[0].classList.add("visible");
     }
 }
 

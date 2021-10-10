@@ -4,15 +4,20 @@
 
     <div class="container-fluid my-3 centered">
        
-        <div class="card" style="height: 80vh; width: 100%;">
+        <div class="card report-tables">
 
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-11">
+                    <div class="col-sm-9">
                         <h3 class="card-title">Inventory</h3>
                     </div>
+                    <div class="col-sm-2">
+                        {% if searchKeyword != 'all' %}
+                            Showing search results for "{{searchKeyword}}"
+                        {% endif %}
+                    </div>
                    <div class="col-sm-1">
-                       <a id="view-all-btn" class="btn btn-light btn-outline-secondary hidden" href="/inventory">View All</a>
+                       <a class="view-all-btn btn btn-light btn-outline-secondary hidden" href="/inventory">View All</a>
                     </div>
                 </div>
                 <table class="table table-light">
@@ -43,8 +48,8 @@
                                 <td>{{ stock.itemCode }}</td>
                                 <td>{{ stock.itemName }}</td>
                                 <td>{{ stock.stockSize }}</td>
-                                <td>{{ stock.entryTime }}</td>
-                                <td>{{ stock.expiryDate }}</td>
+                                <td>{{ (stock.entryTime).strftime('%d-%m-%Y %I:%M %p') }}</td>
+                                <td>{{ stock.expiryDate.strftime('%d-%m-%Y') }}</td>
                                 <td align="center"> 
                                     <a href="/update/{{stock.id}}">
                                         <i class="fa fa-pencil success-icon" aria-hidden="true"></i> 
@@ -61,6 +66,7 @@
                 </table>
             </div>
         </div>
+        <!-- Pagination -->
         <div class="container my-3">
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-end">
@@ -68,7 +74,7 @@
                         {% if allStocks.page == 1 %}
                             disabled
                         {% endif %}">
-                    <a class="page-link" href="{{ url_for('inventory', page=allStocks.prev_num )}}" aria-label="Previous">
+                    <a class="page-link" href="{{ url_for('inventory', page=allStocks.prev_num, search=searchKeyword )}}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
@@ -77,7 +83,7 @@
                         <li class="page-item {% if allStocks.page == page_num %}
                             active
                         {% endif %}">
-                            <a class="page-link" href="{{ url_for('inventory', page=page_num )}}">
+                            <a class="page-link" href="{{ url_for('inventory', page=page_num, search=searchKeyword  )}}">
                                 {{ page_num }}
                             </a>
                         </li>
@@ -89,7 +95,7 @@
                     {% if allStocks.page == allStocks.pages %}
                         disabled
                     {% endif %}">
-                    <a class="page-link" href="{{ url_for('inventory', page=allStocks.next_num )}}" aria-label="Next">
+                    <a class="page-link" href="{{ url_for('inventory', page=allStocks.next_num, search=searchKeyword  )}}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
