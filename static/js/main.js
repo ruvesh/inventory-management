@@ -3,7 +3,17 @@ window.onload = function() {
   route=window.location.pathname
   setActiveNavLink(route);
   hideOrShowViewAllBtn(window.location.pathname, window.location.search);
+  hideOldDatesInExpiryInput(window.location.pathname)
 };
+
+function hideOldDatesInExpiryInput(windowLocationPath){
+    if(windowLocationPath == '/stock') {
+        var date = new Date();
+        var minDate = new Date(date.setDate(date.getDate() + 1)).toISOString().split('T')[0];
+        document.getElementById('expiryDate').setAttribute('min', minDate);  
+    }
+
+}
 
 function hideOrShowViewAllBtn(windowLocationPath, windowLocationSearch){
     if((windowLocationPath == '/inventory' || windowLocationPath == '/reports') 
