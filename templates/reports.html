@@ -56,7 +56,7 @@
                                 <td>{{ stock.itemName }}</td>
                                 <td>{{ stock.stockSize }}</td>
                                 <td>{{ stock.entryTime.strftime('%d-%m-%Y %I:%M %p') }}</td>
-                                <td>{{ stock.expiryDate.strftime('%d-%m-%Y') }}</td>
+                                <td colspan="2">{{ stock.expiryDate.strftime('%d-%m-%Y') }}</td>
                                 
                             </tr>
                         {% endfor %}
