@@ -78,7 +78,7 @@
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                {% for page_num in stocks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% for page_num in stocks.iter_pages() %}
                     {% if page_num %}
                         <li class="page-item {% if stocks.page == page_num %}
                             active
@@ -87,6 +87,8 @@
                                 {{ page_num }}
                             </a>
                         </li>
+                    {% else %}
+                        <span class=ellipsis>…</span>
                     {% endif %} 
                     
                 {% endfor %}

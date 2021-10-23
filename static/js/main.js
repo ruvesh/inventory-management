@@ -4,7 +4,14 @@ window.onload = function() {
   setActiveNavLink(route);
   hideOrShowViewAllBtn(window.location.pathname, window.location.search);
   hideOldDatesInExpiryInput(window.location.pathname)
+  hideOrShowLogoutButton(window.location.pathname)
 };
+
+function hideOrShowLogoutButton(windowLocationPath){
+    if(windowLocationPath != '/login'){
+        document.getElementById('logout-btn').classList.add("visible")
+    }
+}
 
 function hideOldDatesInExpiryInput(windowLocationPath){
     if(windowLocationPath == '/stock') {
@@ -63,5 +70,40 @@ function showSuccessMessage(message){
         title: message,
         showConfirmButton: false,
         timer: 2500
+    })
+}
+
+function showErrorMessage(message){
+    Swal.fire({
+        icon: 'error',
+        title: message,
+        showConfirmButton: false,
+        timer: 2500
+    })
+}
+
+function showInfoMessage(message){
+    Swal.fire({
+        icon: 'info',
+        title: message,
+        showConfirmButton: false,
+        timer: 2500
+    })
+}
+
+function confirmLogout(e, logout_url){
+    e.preventDefault()
+    Swal.fire({
+        title: 'Do You really wish to logout?',
+        text: "You will need to login again to use the application.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, Logout!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+        window.location.replace(logout_url)
+        }
     })
 }

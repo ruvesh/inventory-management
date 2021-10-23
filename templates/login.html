@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock title %}
+{% block body %}
+    <div class="container my-3 col-md-4 centered">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title mb-5">Login</h3>
+                <form autocomplete="off" method="POST" action="/login">
+                    <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="username" placeholder="user" name="username" required>
+                    <label for="username" class="form-label">Username</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+                    <label for="password" class="form-label">Password</label>
+                    </div>
+                    <div class="mb-3" style="float: right;">
+                        <button type="submit" class="btn btn-outline-dark btn-light">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    

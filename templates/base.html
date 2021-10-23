@@ -47,6 +47,14 @@
               </div>
               
             </div>
+
+            <div class="navbar-nav ms-auto">
+              <div class="nav-item">
+                <a id="logout-btn" onclick="confirmLogout(event, '/logout')" class="nav-link hidden">
+                  <i class="fa fa-power-off"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
@@ -56,12 +64,25 @@
       {% endblock body %}
 
 
-  {% with messages = get_flashed_messages() %}
+  {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
-        {% for message in messages %}
-          <script>
-            showSuccessMessage('{{message}}');
-          </script>
+        {% for category, message in messages %}
+          {% if category == "error" %}
+            <script>
+              showErrorMessage('{{message}}');
+            </script>
+          {% elif category == "info" %}
+            <script>
+              showInfoMessage('{{message}}');
+            </script>
+          {% else %}
+            <script>
+              showSuccessMessage('{{message}}');
+            </script>
+          {% endif %}
+
+          
+          
         {% endfor %}
     {% endif %}
   {% endwith %}
