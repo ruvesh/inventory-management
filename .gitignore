@@ -124,5 +124,3 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# sqlite dbs
-*.db
