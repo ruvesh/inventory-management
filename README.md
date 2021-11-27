@@ -2,6 +2,12 @@
 
 Application for tracking and reporting inventory stocks and their expiry reports
 
+## Hosting
+
+### Heroku
+
+https://inventory-management-ruvesh.herokuapp.com/
+
 ## Tech Stack
 
 ### Programming Language/Markups
