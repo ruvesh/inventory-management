@@ -7,7 +7,7 @@ from flask_login.utils import login_user
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from flask_login import LoginManager, login_manager, UserMixin, login_user, logout_user, login_required, current_user
-
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///inventory.db'
@@ -307,5 +307,5 @@ def delete_user(username):
     
 
 if __name__ == '__main__':
-    app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+    app.secret_key = os.environ['SECRET_KEY']
     app.run(debug=False)
