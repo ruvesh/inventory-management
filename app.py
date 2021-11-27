@@ -115,10 +115,12 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/')
-@login_required
-def dashboard():
-    return render_template('index.html')
+# Commenting to hide incomplete dashboard
+
+# @app.route('/')
+# @login_required
+# def dashboard():
+#     return render_template('index.html')
 
 @app.route('/stock', methods= ['POST', 'GET'])
 @login_required
@@ -138,6 +140,7 @@ def stock():
         
     return render_template('stock.html')
 
+@app.route('/')
 @app.route('/inventory')
 @login_required
 def inventory():

@@ -37,6 +37,7 @@ function setActiveNavLink(route){
         document.getElementById("add-stock-nav-link").classList.add("active");
         break;
     case '/inventory':
+    case '/':
         document.getElementById("inventory-nav-link").classList.add("active");
         break;
     case '/reports':
