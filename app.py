@@ -307,5 +307,5 @@ def delete_user(username):
     
 
 if __name__ == '__main__':
-    app.secret_key = os.environ['SECRET_KEY']
+    app.secret_key = os.environ.get('SECRET_KEY')
     app.run(debug=False)
