@@ -100,13 +100,13 @@ def login():
             user.id = username
             login_user(user)
             flash("Authenticated")
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('inventory'))
         flash("Invalid Credentials! Access Denied!", "error")
         return redirect(url_for('login'))
     elif request.method == 'GET':
         if current_user.is_authenticated:
             flash("Already Logged in", "info")
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('inventory'))
         return render_template('login.html')
     
 
