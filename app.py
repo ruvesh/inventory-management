@@ -12,7 +12,7 @@ import os
 app = Flask(__name__)
 if os.environ.get('ENV') == 'production':
     app.secret_key = os.environ.get('SECRET_KEY')
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace('postgres://','postgressql://')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace('postgres://','postgresql://')
 else:
     app.secret_key = 'developmentkey'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost/inventory'
