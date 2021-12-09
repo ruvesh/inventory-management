@@ -31,4 +31,4 @@ https://inventory-management-ruvesh.herokuapp.com/
 * Sweet Alert 2
 
 ### Database
-* SQLite
+* Postgres
