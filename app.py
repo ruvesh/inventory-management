@@ -10,8 +10,13 @@ from flask_login import LoginManager, login_manager, UserMixin, login_user, logo
 import os
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///inventory.db'
+if os.environ.get('ENV') == 'production':
+    app.secret_key = os.environ.get('SECRET_KEY')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+else:
+    app.secret_key = 'developmentkey'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost/inventory'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 ROWS_PER_PAGE=10
